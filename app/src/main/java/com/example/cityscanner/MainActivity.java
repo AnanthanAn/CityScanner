@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button mapButton;
+    Button mapButton,userButton;
     EditText searchText;
     TextView textView;
     @Override
@@ -21,10 +21,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mapButton = findViewById(R.id.button);
+        userButton = findViewById(R.id.userButton);
         searchText = findViewById(R.id.searchText);
         textView = findViewById(R.id.textView);
 
-        textView.setTextSize(40);
+        //textView.setTextSize(40);
 
 
 
@@ -36,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
                 String searchStrng = searchText.getText().toString();
                 intent.putExtra("searchTxt",searchStrng);
+
+                startActivity(intent);
+
+            }
+        });
+
+        userButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this,UserActivity.class);
 
                 startActivity(intent);
 
