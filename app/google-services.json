@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "701724391369",
+    "firebase_url": "https://cityscanner-fc359.firebaseio.com",
+    "project_id": "cityscanner-fc359",
+    "storage_bucket": "cityscanner-fc359.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701724391369:android:56d04289eb3ccbb9",
+        "android_client_info": {
+          "package_name": "com.example.cityscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701724391369-mpvl6b690vqbeb43hhflfork7118jqs1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cityscanner",
+            "certificate_hash": "962a598eda81a129a87a149d5b2af9169e09f472"
+          }
+        },
+        {
+          "client_id": "701724391369-g9nosrudifku00qig7v93gbhrl8uiokd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg870z3Xg6fdu4R77clNkNuaxfzeRZH8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701724391369-g9nosrudifku00qig7v93gbhrl8uiokd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
