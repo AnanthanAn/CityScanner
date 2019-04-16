@@ -107,6 +107,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     Location currentLocation = (Location) task.getResult();
                     zoomCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), 12);
+                    latitude = currentLocation.getLatitude();
+                    longitude = currentLocation.getLongitude();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Coudn't find Location", Toast.LENGTH_LONG).show();
@@ -163,22 +165,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
         getDeviceLoc();
         //geoLocate();
-
-        if(buttonId == 1){
-
-            Object dataTransfer[] = new Object[2];
-            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-
-            mMap.clear();
-            String hospital = "hospital";
-            String url = getUrl(latitude, longitude, hospital);
-            dataTransfer[0] = mMap;
-            dataTransfer[1] = url;
+        displayHospitls();
 
 
-            getNearbyPlacesData.execute(dataTransfer);
-            Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_SHORT).show();
-        }
         //zoomCamera(new LatLng(location.getLatitude(),location.getLongitude()),12);
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -234,6 +223,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public  void displayHospitls(){
+
+        Object dataTransfer[] = new Object[2];
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+
+        mMap.clear();
+        String hospital = "hospital";
+        String url = getUrl(latitude, longitude, hospital);
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url;
+
+
+        getNearbyPlacesData.execute(dataTransfer);
+        Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_SHORT).show();
+    }
+
 //    protected synchronized void bulidGoogleApiClient() {
 //        client = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
 //        client.connect();
@@ -276,4 +281,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else
             return true;
     }
+
+
 }
