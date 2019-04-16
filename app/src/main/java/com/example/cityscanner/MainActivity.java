@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     Button mapButton,userButton;
     EditText searchText;
     TextView textView;
+    ProgressBar progressBar;
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
         userButton = findViewById(R.id.userButton);
         searchText = findViewById(R.id.searchText);
         textView = findViewById(R.id.textView);
+        progressBar = findViewById(R.id.progressBar);
 
         textView.setTextSize(50);
 
-
+        mAuth = FirebaseAuth.getInstance();
 
 
         mapButton.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +72,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        if (mAuth.getCurrentUser() != null){
+            progressBar.setVisibility(View.GONE);
 
+        }else{
+            Intent intent = new Intent(MainActivity.this,UserActivity.class);
+            startActivity(intent
+            );
+        }
     }
 }
