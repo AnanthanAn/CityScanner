@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserActivity extends AppCompatActivity {
 
-    private EditText editTextName, editTextEmail, editTextPassword, editTextPhone;
+    private EditText editTextName, editTextEmail, editTextPassword, editTextPhone, editTextAge;
     private ProgressBar progressBar;
     private Button registerButton;
 
@@ -34,6 +34,7 @@ public class UserActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
         editTextPhone = findViewById(R.id.edit_text_phone);
+        editTextAge = findViewById(R.id.edit_text_age);
         progressBar = findViewById(R.id.progressbar);
         registerButton = (Button)findViewById(R.id.button_register);
         progressBar.setVisibility(View.GONE);
@@ -58,6 +59,7 @@ public class UserActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         final String phone = editTextPhone.getText().toString().trim();
+        final String age = editTextAge.getText().toString().trim();
 
         if (name.isEmpty()) {
             editTextName.setError(getString(R.string.input_error_name));
@@ -113,7 +115,8 @@ public class UserActivity extends AppCompatActivity {
                             User user = new User(
                                     name,
                                     email,
-                                    phone
+                                    phone,
+                                    age
                             );
 
                             FirebaseDatabase.getInstance().getReference("Users")

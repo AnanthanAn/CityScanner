@@ -57,6 +57,20 @@
             android:drawablePadding="@dimen/drawable_padding"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:nextFocusDown="@id/edit_text_age"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorHint" />
+
+        <EditText
+            android:id="@+id/edit_text_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:hint="@string/age"
+            android:inputType="number"
+            android:maxLength="10"
             android:nextFocusDown="@id/edit_text_phone"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorHint" />

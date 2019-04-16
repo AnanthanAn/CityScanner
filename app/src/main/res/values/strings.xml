@@ -5,6 +5,7 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="phone">phone</string>
+    <string name="age">age</string>
     <string name="register">Register</string>
     <string name="input_error_name">name required</string>
     <string name="input_error_email">email required</string>
