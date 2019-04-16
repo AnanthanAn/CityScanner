@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         searchText = findViewById(R.id.searchText);
         textView = findViewById(R.id.textView);
 
-        //textView.setTextSize(40);
+        textView.setTextSize(50);
 
 
 
@@ -49,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this,UserActivity.class);
 
+                startActivity(intent);
+
+            }
+        });
+
+
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this,MapsActivity.class);
+                intent.putExtra("ID",1);
                 startActivity(intent);
 
             }

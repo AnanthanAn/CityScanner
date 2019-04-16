@@ -17,13 +17,16 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,8 +41,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationManager locationManager;
     LocationListener locationListener;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private GoogleApiClient client;
+    private LocationRequest locationRequest;
+    private Location lastlocation;
+    private Marker currentLocationmMarker;
+    public static final int REQUEST_LOCATION_CODE = 99;
+    int PROXIMITY_RADIUS = 10000;
+    double latitude,longitude;
+
+
 
     private  String searchText = "";
+    private  int buttonId = 0;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -62,12 +75,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        checkLocationPermission();
+
         searchText = getIntent().getStringExtra("searchTxt");
+
+        buttonId = getIntent().getIntExtra("ID",0);
 
         //Toast.makeText(getApplicationContext(),searchText,Toast.LENGTH_LONG).show();
 
     }
 
+    //current location
     private void getDeviceLoc() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -144,7 +162,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mMap.setMyLocationEnabled(true);
         getDeviceLoc();
-        geoLocate();
+        //geoLocate();
+
+        if(buttonId == 1){
+
+            Object dataTransfer[] = new Object[2];
+            GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+
+            mMap.clear();
+            String hospital = "hospital";
+            String url = getUrl(latitude, longitude, hospital);
+            dataTransfer[0] = mMap;
+            dataTransfer[1] = url;
+
+
+            getNearbyPlacesData.execute(dataTransfer);
+            Toast.makeText(MapsActivity.this, "Showing Nearby Hospitals", Toast.LENGTH_SHORT).show();
+        }
         //zoomCamera(new LatLng(location.getLatitude(),location.getLongitude()),12);
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -198,5 +232,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
         }
 
+    }
+
+//    protected synchronized void bulidGoogleApiClient() {
+//        client = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
+//        client.connect();
+//
+//    }
+
+    private String getUrl(double latitude , double longitude , String nearbyPlace)
+    {
+
+        StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlaceUrl.append("location="+latitude+","+longitude);
+        googlePlaceUrl.append("&radius="+PROXIMITY_RADIUS);
+        googlePlaceUrl.append("&type="+nearbyPlace);
+        googlePlaceUrl.append("&sensor=true");
+        googlePlaceUrl.append("&key="+"AIzaSyDleHmY0jXHrH_Rxw7B73yPLdm2DK_WtYQ");
+
+        Log.d("MapsActivity", "url = "+googlePlaceUrl.toString());
+
+        return googlePlaceUrl.toString();
+    }
+
+
+    //permission request cheyan ulla code
+    public boolean checkLocationPermission()
+    {
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)  != PackageManager.PERMISSION_GRANTED )
+        {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION))
+            {
+                ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION },REQUEST_LOCATION_CODE);
+            }
+            else
+            {
+                ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION },REQUEST_LOCATION_CODE);
+            }
+            return false;
+
+        }
+        else
+            return true;
     }
 }
