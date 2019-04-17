@@ -1,5 +1,6 @@
 package com.example.cityscanner;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -127,6 +128,8 @@ public class UserActivity extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
                                         Toast.makeText(UserActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(UserActivity.this,MainActivity.class);
+                                        startActivity(intent);
                                     } else {
                                         //display a failure message
                                     }

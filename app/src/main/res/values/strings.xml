@@ -15,4 +15,5 @@
     <string name="input_error_phone_invalid">enter a valid phone number</string>
     <string name="registration_success">Registered Successfully</string>
     <string name="input_error_email_invalid">enter a valid email</string>
+    <string name="action_signout">Sign Out</string>
 </resources>
