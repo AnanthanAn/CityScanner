@@ -119,7 +119,6 @@ public class UserActivity extends AppCompatActivity {
                                     phone,
                                     age
                             );
-
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

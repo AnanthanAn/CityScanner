@@ -1,8 +1,10 @@
 package com.example.cityscanner;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.textView);
         progressBar = findViewById(R.id.progressBar);
 
+        //Text view override prop
         textView.setTextSize(50);
+        textView.setTextColor(Color.WHITE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
 
         }else{
-            Intent intent = new Intent(MainActivity.this,UserActivity.class);
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
         }
     }
@@ -107,8 +111,15 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_signout) {
 
+            Toast.makeText(getApplicationContext(),"Signed Out Successfully",Toast.LENGTH_SHORT).show();
+
             FirebaseAuth.getInstance().signOut();
-            Toast.makeText(this,"Signed Out Successfully",Toast.LENGTH_SHORT);
+
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+
+            Log.i("Logggggggggggouttttttt", String.valueOf(FirebaseAuth.getInstance().getCurrentUser()));
+
             return true;
         }
 
