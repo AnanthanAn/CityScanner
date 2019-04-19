@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this,UserActivity.class);
+                Intent intent = new Intent(MainActivity.this,FirestoreEntryActivity.class);
 
                 startActivity(intent);
 
