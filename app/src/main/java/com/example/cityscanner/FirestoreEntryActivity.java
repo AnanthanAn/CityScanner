@@ -1,5 +1,6 @@
 package com.example.cityscanner;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,5 +100,7 @@ public class FirestoreEntryActivity extends AppCompatActivity {
 //                });
 
 
+        Intent intent = new Intent(FirestoreEntryActivity.this,NearbyListActivity.class);
+        startActivity(intent);
     }
 }

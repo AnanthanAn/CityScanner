@@ -1,5 +1,6 @@
 package com.example.cityscanner;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog progressDialog =new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Logging in...");
+                progressDialog.setCancelable(false);
+                progressDialog.setIndeterminate(false);
+                progressDialog.show();
                 String email = emailET.getText().toString().trim();
                 String passwrd = passwrdET.getText().toString().trim();
                 mauth.signInWithEmailAndPassword(email,passwrd)

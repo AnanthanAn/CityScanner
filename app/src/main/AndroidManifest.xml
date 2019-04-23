@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirestoreEntryActivity"></activity>
+        <activity android:name=".NearbyListActivity"></activity>
+        <activity android:name=".FirestoreEntryActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".UserActivity" />
         <!--
