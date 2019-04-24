@@ -49,6 +49,10 @@ public class NearbyListActivity extends AppCompatActivity {
 
         Log.i(SEARCH_KEY,SearchKey);
 
+        if(SearchKey == null || SearchKey ==""){
+            Toast.makeText(getApplicationContext(),"No shops are available. Sorry",Toast.LENGTH_LONG).show();
+        }
+
         nearbyItems = new ArrayList<>();
 
         final ProgressDialog progressDialog =new ProgressDialog(NearbyListActivity.this);
