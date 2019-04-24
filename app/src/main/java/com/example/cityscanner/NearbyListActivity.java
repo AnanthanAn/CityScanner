@@ -1,5 +1,7 @@
 package com.example.cityscanner;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,8 @@ public class NearbyListActivity extends AppCompatActivity {
     private static final String KEY_RATING = "rating";
     private static final String KEY_PHONE = "phone";
     private static final String KEY_AVAIL_ITEMS = "avail_items";
+    private static final String SEARCH_KEY = "SEARCH_KEY";
+
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -40,9 +44,20 @@ public class NearbyListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_list);
+        Intent intent = getIntent();
+        String SearchKey = intent.getStringExtra(SEARCH_KEY);
+
+        Log.i(SEARCH_KEY,SearchKey);
+
         nearbyItems = new ArrayList<>();
 
-        dataRef.whereArrayContains(KEY_AVAIL_ITEMS,"flux")
+        final ProgressDialog progressDialog =new ProgressDialog(NearbyListActivity.this);
+        progressDialog.setMessage("Loding...");
+        progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(false);
+        progressDialog.show();
+
+        dataRef.whereArrayContains(KEY_AVAIL_ITEMS,SearchKey)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -57,8 +72,10 @@ public class NearbyListActivity extends AppCompatActivity {
 
                             mAdapter.notifyDataSetChanged();
                         }
+                        progressDialog.dismiss();
 
                     }
+
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -67,7 +84,7 @@ public class NearbyListActivity extends AppCompatActivity {
                     }
                 });
 
-        nearbyItems.add(new NearbyItem("demo","demooooo","98765"));
+        //nearbyItems.add(new NearbyItem("demo","demooooo","98765"));
 
 
         recyclerView = findViewById(R.id.nearbyRecyclerView);

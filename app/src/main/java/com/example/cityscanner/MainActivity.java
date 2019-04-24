@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String SEARCH_KEY = "SEARCH_KEY";
     Button mapButton,userButton;
     EditText searchText;
     TextView textView;
@@ -46,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MapsActivity.class);
+                Intent intent = new Intent(MainActivity.this,NearbyListActivity.class);
 
                 String searchStrng = searchText.getText().toString();
-                intent.putExtra("searchTxt",searchStrng);
+                intent.putExtra(SEARCH_KEY,searchStrng);
 
                 startActivity(intent);
 
