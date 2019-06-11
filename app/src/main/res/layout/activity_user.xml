@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent3"
+    android:background="@color/colorPrimary"
     tools:context=".UserActivity">
 
     <LinearLayout
@@ -88,6 +88,31 @@
             android:nextFocusDown="@id/button_register"
             android:textColor="@color/colorText"
             android:textColorHint="@color/colorHint" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male"
+                android:textColor="@color/colorText"
+                />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Female"
+                android:textColor="@color/colorText"
+                />
+        </RadioGroup>
 
         <Button
             android:id="@+id/button_register"

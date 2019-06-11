@@ -1,4 +1,4 @@
-package com.example.cityscanner;
+package com.example.cityscanner.POJO;
     public class User {
         public String name, email, phone,age;
 
